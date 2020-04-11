@@ -33,7 +33,7 @@ public:
     {
         meshCube.tris = {
             // south                                                                    CONTINUE HERE
-            { 0.0f, 0.0f, 0 }
+            { 0.0f, 0.0f, 0.1f }
         };
         
         return true;            // temporary value
