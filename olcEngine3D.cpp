@@ -97,12 +97,57 @@ public:
     {   
         Fill(0, 0, ScreenWidth(), ScreenHeight(), PIXEL_SOLID, FG_BLACK);
         
+        mat4x4 matRotZ, matRotX;
+        fTheta += 1.0f * fElapsedTime;
+
+        // rotation z
+        matRotZ.m[0][0] = cosf(fTheta);
+        matRotZ.m[0][1] = sinf(fTheta);
+        matRotZ.m[1][0] = -sinf(fTheta);
+        matRotZ.m[1][1] = cosf(fTheta);
+        matRotZ.m[2][2] = 1;
+        matRotZ.m[3][3] = 1;
+
+        // rotation x
+        matRotX.m[0][0] = 1;
+        matRotX.m[1][1] = cosf(fTheta * 0.05f);
+        matRotX.m[1][2] = sinf(fTheta * 0.05f);
+        matRotX.m[2][1] = -sinf(fTheta * 0.05f);
+        matRotX.m[2][2] = cosf(fTheta * 0.05f);
+        matRotX.m[3][3] = 1;
+
         // draw triangles
         for (auto tri : meshCube.tris) {
-            triangle triProjected;
-            MultiplyMatrixVector(tri.p[0], triProjected.p[0], matProj);
-            MultiplyMatrixVector(tri.p[0], triProjected.p[0], matProj);
-            MultiplyMatrixVector(tri.p[0], triProjected.p[0], matProj);
+            triangle triProjected, triTranslated, triRotatedZ, triRotatedZX;
+
+            MultiplyMatrixVector(tri.p[0], triRotatedZ.p[0], matRotZ);
+            MultiplyMatrixVector(tri.p[1], triRotatedZ.p[1], matRotZ);
+            MultiplyMatrixVector(tri.p[2], triRotatedZ.p[2], matRotZ);
+
+            MultiplyMatrixVector(triRotatedZ.p[0], triRotatedZX.p[0], matRotX);
+            MultiplyMatrixVector(triRotatedZ.p[1], triRotatedZX.p[1], matRotX);
+            MultiplyMatrixVector(triRotatedZ.p[2], triRotatedZX.p[2], matRotX);
+
+            triTranslated = triRotatedZX;
+            triTranslated.p[0].z = triRotatedZX.p[0].z + 3.0f;
+            triTranslated.p[1].z = triRotatedZX.p[1].z + 3.0f;
+            triTranslated.p[2].z = triRotatedZX.p[2].z + 3.0f;
+
+            MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
+            MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
+            MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
+
+            // scale to view
+            triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f;
+            triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
+            triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
+
+            triProjected.p[0].x *= 0.5f * (float)ScreenWidth();
+            triProjected.p[0].y *= 0.5f * (float)ScreenHeight();
+            triProjected.p[1].x *= 0.5f * (float)ScreenWidth();
+            triProjected.p[1].y *= 0.5f * (float)ScreenHeight();
+            triProjected.p[2].x *= 0.5f * (float)ScreenWidth();
+            triProjected.p[2].y *= 0.5f * (float)ScreenHeight();
 
             DrawTriangle(triProjected.p[0].x, triProjected.p[0].y, 
                 triProjected.p[1].x, triProjected.p[1].y,
