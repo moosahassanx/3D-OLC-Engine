@@ -1,0 +1,11 @@
+﻿  olcEngine3D.cpp
+D:\Visual Studio Projects\3D-OLC-Engine\olcConsoleGameEngine.h(649,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcConsoleGameEngine.h(989,1): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcConsoleGameEngine.h(1086,1): warning C4312: 'type cast': conversion from 'DWORD' to 'olcConsoleGameEngine *' of greater size
+D:\Visual Studio Projects\3D-OLC-Engine\olcConsoleGameEngine.h(1301,45): error C2014: preprocessor command must start as first nonwhite space
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(109,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(109,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(108,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(108,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(107,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Visual Studio Projects\3D-OLC-Engine\olcEngine3D.cpp(107,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
